@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task4 No2</title>
+</head>
+
+<body>
+    <label for="myTextField">Enter your name:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+    <input type="text" id="myTextField" name="myTextField" 
+        onfocus="Focus(this)" onblur="Blur(this)"
+        onchange="Change(this)">
+
+    <script>
+        function Focus(element) {
+            element.style.transform = 'scale(1.2)';
+        }
+        function Blur(element) {
+            element.style.transform = 'scale(1)';
+        }
+        function Change(element) {
+            element.style.border = '2px solid blue';
+        }
+    </script>
+
+</body>
+</html>
