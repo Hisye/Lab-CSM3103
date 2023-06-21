@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Staff Details</title>
+    <style>
+        footer {
+          text-align: center;
+          padding: 3px;
+          background-color: DarkSalmon;
+          color: white;
+        }
+        </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+
+    <h2>Staff Details</h2>
+    <div id="employeeDetails"></div>
+
+
+    <script>
+        $(document).ready(function () {
+            var urlParams = new URLSearchParams(window.location.search);
+            var employeeNumber = urlParams.get('id');
+
+            $.ajax({
+                url: 'https://kerbau.odaje.biz/getstaffbyid.php?id=' + employeeNumber,
+                dataType: 'json',
+                success: function (data) {
+                    var employeeDetails = $('#employeeDetails');
+
+                    if (data.length > 0 && JSON.parse(data[0]).status === 1) {
+                        var employeeData = JSON.parse(data[1]);
+
+                        var employeeInfo = $('<div>');
+
+                        for (var key in employeeData) {
+                            if (employeeData.hasOwnProperty(key)) {
+                                var value = employeeData[key];
+
+                                var listItem = $('<p>').text(key + ': ' + value);
+                                employeeInfo.append(listItem);
+                            }
+                        }
+
+                        employeeDetails.append(employeeInfo);
+                    } else {
+                        employeeDetails.text('No data found for the employee.');
+                    }
+                }
+            });
+        });
+    </script>
+    <footer>
+        <p>Front End Programming &copy;2023<br>
+            by hisye</p>
+    </footer>
+</body>
+
+</html>
